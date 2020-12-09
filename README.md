@@ -29,6 +29,7 @@
 | area_id             | integer   | null: false |
 | date_of_shipment_id | integer   | null: false |
 | user                | reference |             |
+| item_info           | string    | null: false |
 
 ### Association
 - belongs to :user
