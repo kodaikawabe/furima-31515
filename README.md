@@ -19,18 +19,16 @@
 
 ## itemsテーブル
 
-| Column           | Type      | Options     |
-| ---------------- | --------- | ------------|
-| name             | text      | null: false |
-| image            |           |             |
-| price            | integer   | null: false |
-| user             | reference |             |
-| category         | text      | null: false |
-| status           | text      | null: false |
-| shipping_charges | text      | null: false |
-| area             | text      | null: false |
-| date_of_shipment | text      | null: false |
-| item             | reference |             |
+| Column              | Type      | Options     |
+| ------------------- | --------- | ------------|
+| name                | text      | null: false |
+| price               | integer   | null: false |
+| category            | text      | null: false |
+| status_id           | text      | null: false |
+| shipping_charges_id | text      | null: false |
+| area_id             | text      | null: false |
+| date_of_shipment_id | text      | null: false |
+| user                | reference |             |
 
 ### Association
 - belongs to :user
@@ -66,12 +64,12 @@
 
 | Column             | Type        | Options     |
 | ------------------ | ----------- | ------------|
-| postal_code        | text        | null: false |
-| prefectures        | text        | null: false |
-| municipal_district | text        | null: false |
-| address            | text        | null: false |
-| building_name      | text        | null: false |
-| phone_number       | integer     |             |
+| postal_code        | string      | null: false |
+| prefectures        | integer     | null: false |
+| municipal_district | string      | null: false |
+| address            | string      | null: false |
+| building_name      | string      | null: false |
+| phone_number       | string      | null: false |
 | buy                | reference   |             |
 
 
