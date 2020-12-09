@@ -21,7 +21,7 @@
 
 | Column              | Type      | Options     |
 | ------------------- | --------- | ------------|
-| name                | text      | null: false |
+| name                | string    | null: false |
 | price               | integer   | null: false |
 | category_id         | integer   | null: false |
 | status_id           | integer   | null: false |
@@ -68,7 +68,7 @@
 | prefectures_id     | integer     | null: false |
 | municipal_district | string      | null: false |
 | address            | string      | null: false |
-| building_name      | string      | null: false |
+| building_name      | string      |             |
 | phone_number       | string      | null: false |
 | buy                | reference   |             |
 
