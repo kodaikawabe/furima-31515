@@ -23,11 +23,11 @@
 | ------------------- | --------- | ------------|
 | name                | text      | null: false |
 | price               | integer   | null: false |
-| category            | text      | null: false |
-| status_id           | text      | null: false |
-| shipping_charges_id | text      | null: false |
-| area_id             | text      | null: false |
-| date_of_shipment_id | text      | null: false |
+| category_id         | integer   | null: false |
+| status_id           | integer   | null: false |
+| shipping_charges_id | integer   | null: false |
+| area_id             | integer   | null: false |
+| date_of_shipment_id | integer   | null: false |
 | user                | reference |             |
 
 ### Association
@@ -65,7 +65,7 @@
 | Column             | Type        | Options     |
 | ------------------ | ----------- | ------------|
 | postal_code        | string      | null: false |
-| prefectures        | integer     | null: false |
+| prefectures_id     | integer     | null: false |
 | municipal_district | string      | null: false |
 | address            | string      | null: false |
 | building_name      | string      | null: false |
