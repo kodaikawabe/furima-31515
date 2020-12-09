@@ -1,15 +1,15 @@
 ## usersテーブル
 
-| Column           | Type   | Options     |
-| ---------------- | ------ | ------------|
-| nickname         | string | null: false |
-| mail_address     | string | null: false |
-| password         | string | null: false |
-| first_name       | string | null: false |
-| family_name      | string | null: false |
-| first_name_kana  | string | null: false |
-| family_name_kana | string | null: false |
-| birthday         | string | null: false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ------------|
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| first_name         | string | null: false |
+| family_name        | string | null: false |
+| first_name_kana    | string | null: false |
+| family_name_kana   | string | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 - has_many :items
@@ -19,12 +19,18 @@
 
 ## itemsテーブル
 
-| Column      | Type      | Options     |
-| ----------- | --------- | ------------|
-| name        | text      | null: false |
-| image       |           |             |
-| price       | integer   | null: false |
-| user        | reference |             |
+| Column           | Type      | Options     |
+| ---------------- | --------- | ------------|
+| name             | text      | null: false |
+| image            |           |             |
+| price            | integer   | null: false |
+| user             | reference |             |
+| category         | text      | null: false |
+| status           | text      | null: false |
+| shipping_charges | text      | null: false |
+| area             | text      | null: false |
+| date_of_shipment | text      | null: false |
+| item             | reference |             |
 
 ### Association
 - belongs to :user
@@ -48,31 +54,13 @@
 | Column           | Type        | Options     |
 | ---------------- | ----------- | ------------|
 | user             | reference   |             |
-| category         | text        | null: false |
-| status           | text        | null: false |
-| shipping_charges | text        | null: false |
-| area             | text        | null: false |
-| date_of_shipment | text        | null: false |
 | item             | reference   |             |
+
 
 ### Association
 - belongs to :user
 - belongs to :item
-- has_one :delivery
-- has_one :card
-
-## cardsテーブル
-
-| Column         | Type        | Options     |
-| -------------- | ----------- | ------------|
-| card_info      | text        | null: false |
-| month_deadline | integer     | null: false |
-| date_deadline  | integer     | null: false |
-| security_code  | integer     | null: false |
-| buy            | reference   |             |
-
-### Association
-- belongs to :buy
+- has_one :address
 
 ## addressesテーブル
 
