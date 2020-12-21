@@ -9,11 +9,6 @@ describe User do
       it "nickname、email、password、password_confirmation、first_name、family_name、first_name_kana、family_name_kana、birthdayが存在すれば登録できる" do
         expect(@user).to be_valid
       end
-      it "passwordが6文字以上で英数字両方含んでいれば登録できる" do
-        @user.password = "aaa000"
-        @user.password_confirmation = "aaa000"
-        expect(@user).to be_valid
-      end
     end
 
     context '新規登録がうまくいかないとき' do
@@ -114,19 +109,25 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name kana Full-width katakana characters")
       end
-      it "first_name_kana,family_name_kanaが漢字であると登録できない" do
+      it "first_name_kanaが漢字であると登録できない" do
         @user.first_name_kana = "太郎"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
+      end
+      it "family_name_kanaが漢字であると登録できない" do
         @user.family_name_kana = "山田"
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters", 
-          "Family name kana Full-width katakana characters")
+        expect(@user.errors.full_messages).to include("Family name kana Full-width katakana characters")
       end
-      it "first_name_kana,family_name_kanaがひらがなであると登録できない" do
+      it "first_name_kanaがひらがなであると登録できない" do
         @user.first_name_kana = "たろう"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
+      end
+      it "family_name_kanaがひらがなであると登録できない" do
         @user.family_name_kana = "やまだ"
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters", 
-          "Family name kana Full-width katakana characters")
+        expect(@user.errors.full_messages).to include("Family name kana Full-width katakana characters")
       end
       it "birthdayが空では登録できない" do
         @user.birthday = ""
