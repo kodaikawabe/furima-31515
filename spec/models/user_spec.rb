@@ -67,6 +67,12 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+      it "passwordとpassword_confirmationは値が同じでないと登録出来ない" do
+        @user.password = "aaa111"
+        @user.password_confirmation = "111aaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
       it "first_nameが空では登録できない" do
         @user.first_name = ""
         @user.valid?
@@ -87,14 +93,26 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name kana can't be blank", "Family name kana Full-width katakana characters")
       end
-      it "first_name,family_name,first_name_kana,family_name_kanaが半角では登録できない" do
+      it "first_nameが半角では登録できない" do
         @user.first_name = "aaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name  Full-width characters")
+      end
+
+      it "family_nameが半角では登録できない" do
         @user.family_name = "aaa"
-        @user.first_name_kana = "aaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name  Full-width characters")
+      end
+      it "first_name_kanaが半角では登録できない" do
+      @user.first_name_kana = "aaa"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
+      end
+      it "family_name_kanaが半角では登録できない" do
         @user.family_name_kana = "aaa"
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name  Full-width characters", "Family name  Full-width characters",
-          "First name kana Full-width katakana characters", "Family name kana Full-width katakana characters")
+        expect(@user.errors.full_messages).to include("Family name kana Full-width katakana characters")
       end
       it "first_name_kana,family_name_kanaが漢字であると登録できない" do
         @user.first_name_kana = "太郎"
