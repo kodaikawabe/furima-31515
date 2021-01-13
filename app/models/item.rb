@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   belongs_to :area
 
   with_options presence: true do
-    validates :image
+    validates :image, presence: true
     validates :name
     validates :item_info
   end
@@ -28,7 +28,5 @@ class Item < ApplicationRecord
     validates :date_of_shipment_id
   end
 
-  # validates :price, numericality: {only_integer: true, message: 'Half-width number'}
 
-  # validates_inclusion_of　：price, in: 300..9_999_999
 end

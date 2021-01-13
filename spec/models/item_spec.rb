@@ -13,6 +13,11 @@ RSpec.describe Item, type: :model do
       end
     end
     context '商品が出品できない場合' do
+      it 'imageが空では出品できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
       it 'nameが空では出品できない' do
         @item.name = ''
         @item.valid?
@@ -35,6 +40,11 @@ RSpec.describe Item, type: :model do
       end
       it 'priceが英字では出品できない' do
         @item.price = 'aaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
+      end
+      it 'priceが半角英数混合では出品できない' do
+        @item.price = 'aa111'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
       end
