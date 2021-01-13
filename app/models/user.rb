@@ -8,7 +8,7 @@ class User < ApplicationRecord
     validates :nickname
     validates :birthday
   end
-  
+
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: ' Full-width characters' } do
     validates :first_name
     validates :family_name
@@ -19,17 +19,12 @@ class User < ApplicationRecord
     validates :family_name_kana
   end
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
-  validates :password, presence: true, 
-             format: { with: VALID_PASSWORD_REGEX ,message: 'Include both letters and numbers'},
-             length: {minimum: 6}
-
-
-  
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
+  validates :password, presence: true,
+                       format: { with: VALID_PASSWORD_REGEX, message: 'Include both letters and numbers' },
+                       length: { minimum: 6 }
 
   has_many :itemns, dependent: :destroy
   has_many :buys, dependent: :destroy
   has_many :comments, dependent: :destroy
-
-
 end

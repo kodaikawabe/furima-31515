@@ -30,6 +30,7 @@
 | date_of_shipment_id | integer   | null: false |
 | user                | reference |             |
 | item_info           | string    | null: false |
+| image          |             |             
 
 ### Association
 - belongs to :user
