@@ -1,4 +1,4 @@
-class ShippingCharges   < ActiveHash::Base
+class ShippingCharges < ActiveHash::Base
   self.data = [
     { id: 1, name: '--' },
     { id: 2, name: '着払い(購入者負担)' },
@@ -7,5 +7,4 @@ class ShippingCharges   < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-  
-  end
+end

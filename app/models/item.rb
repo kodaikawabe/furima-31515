@@ -17,14 +17,14 @@ class Item < ApplicationRecord
   end
 
   validates :price, presence: true
-  validates :price, numericality: {only_integer: true, message: 'Half-width number'}
-  validates_inclusion_of :price, in: 300..9_999_999
+  validates :price, numericality: { only_integer: true, message: 'Half-width number' }
+  validates_inclusion_of :price, in: 300..9_999_999, message: 'Out of setting range'
 
-  with_options numericality: { other_than: 1 , message: 'Select'} do
+  with_options numericality: { other_than: 1, message: 'Select' } do
     validates :category_id
     validates :status_id
     validates :shipping_charges_id
-    validates :area_id 
+    validates :area_id
     validates :date_of_shipment_id
   end
 
