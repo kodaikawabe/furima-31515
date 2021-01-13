@@ -148,7 +148,7 @@
         <% end %>
       </li>
 
-      <% if @items  %>
+      <% if @items.exists?  %>
 
       <% @items.each do |item| %>
     <li class='list'>
