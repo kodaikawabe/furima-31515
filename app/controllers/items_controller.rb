@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show, :new, :create, :edit]
+  before_action :move_to_index, except: [:index, :show, :new, :create, :edit, :update]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroye]
 
   def index
@@ -29,10 +29,13 @@ class ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:id])
-    item.update(item_params)
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to item_path(@item.id), method: :get 
+    else
+      render :edit
+    end
   end
-
 
   private
 
