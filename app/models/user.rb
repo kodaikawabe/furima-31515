@@ -24,7 +24,7 @@ class User < ApplicationRecord
                        format: { with: VALID_PASSWORD_REGEX, message: 'Include both letters and numbers' },
                        length: { minimum: 6 }
 
-  has_many :itemns, dependent: :destroy
+  has_many :items, dependent: :destroy
   has_many :buys, dependent: :destroy
   has_many :comments, dependent: :destroy
 end

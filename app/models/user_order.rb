@@ -4,24 +4,26 @@ class UserOrder
                 :building_name, :phone_number, :user_id,:item_id, :token              
 
   with_options presence: true do
-    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, 
-                                     message: "is invalid. Include hyphen(-)"}
-    validates :municipal_district, format: { with: /\A[ぁ-んァ-ン一-龥]/,
-                                            message: "is invalid. Input full-width characters."}
-    validates :address
-    validates :pphone_number, format: {with: /\A\d{10}\z|\A\d{11}\z/ ,
-                                       message: "is invalid."}
     validates :token
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, 
+                                     message: "code Input correctly"}
+    validates :prefectures_id, numericality: { other_than: 1, 
+                                      message: "Select" }
+    validates :municipal_district
+    validates :address
+    validates :phone_number, format: {with: /\A\d{10}\z|\A\d{11}\z/ ,
+                                       message: "Input only number"}
+    
   end
 
-    validates :prefecture_id, numericality: { other_than: 0, 
-                                              message: "can't be blank" }
+    
 
 
     def save
       buy = Buy.create(user_id: user_id, item_id: item_id)
-      Address.create(postal_code: postal_code,  prefecture_id: prefecture_id, municipal_district: municipal_district, 
-                     address: address, building_name: building_name, phone_number: phone_number,
+      Address.create(postal_code: postal_code,  prefectures_id: prefectures_id, municipal_district: municipal_district, 
+                     address: address, building_name: building_name, phone_number: phone_number
                      )
     end
+    
 end
