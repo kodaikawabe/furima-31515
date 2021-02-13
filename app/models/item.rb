@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_many :comments, dependent: :destroy
   has_one :buy, dependent: :destroy
   has_one_attached :image, dependent: :destroy
   extend ActiveHash::Associations::ActiveRecordExtensions

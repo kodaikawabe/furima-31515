@@ -1,7 +1,8 @@
 class UserOrder
+  
   include ActiveModel::Model
   attr_accessor :postal_code, :prefectures_id, :municipal_district,:address,
-                :building_name, :phone_number, :user_id,:item_id, :token              
+                :building_name, :phone_number, :user_id,:item_id, :token             
 
   with_options presence: true do
     validates :token
@@ -22,8 +23,7 @@ class UserOrder
     def save
       buy = Buy.create(user_id: user_id, item_id: item_id)
       Address.create(postal_code: postal_code,  prefectures_id: prefectures_id, municipal_district: municipal_district, 
-                     address: address, building_name: building_name, phone_number: phone_number
-                     )
+                     address: address, building_name: building_name, phone_number: phone_number, buy_id: buy.id)
     end
     
 end
