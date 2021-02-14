@@ -17,12 +17,12 @@ RSpec.describe UserOrder, type: :model do
     it 'postal_codeにハイフンが含まれていないと保存できないこと' do
       @user_order.postal_code = '1234567'
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Postal code code Input correctly")
+      expect(@user_order.errors.full_messages).to include('Postal code code Input correctly')
     end
     it 'prefectures_idが1だと保存できないこと' do
       @user_order.prefectures_id = 1
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Prefectures Select")
+      expect(@user_order.errors.full_messages).to include('Prefectures Select')
     end
     it 'municipal_districtが空だと保存できないこと' do
       @user_order.municipal_district = ''
@@ -37,17 +37,17 @@ RSpec.describe UserOrder, type: :model do
     it 'phone_numberが空だと保存できないこと' do
       @user_order.phone_number = ''
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Phone number can't be blank", "Phone number Input only number")
+      expect(@user_order.errors.full_messages).to include("Phone number can't be blank", 'Phone number Input only number')
     end
     it 'phone_numberが全角数字だと保存できないこと' do
       @user_order.phone_number = '０９０１２３４５６７８'
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Phone number Input only number")
+      expect(@user_order.errors.full_messages).to include('Phone number Input only number')
     end
     it 'phone_numberが12桁以上だと保存できないこと' do
       @user_order.phone_number = '090123456789'
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Phone number Input only number")
+      expect(@user_order.errors.full_messages).to include('Phone number Input only number')
     end
     it 'tokenが空だと保存できないこと' do
       @user_order.token = ''
@@ -60,4 +60,3 @@ RSpec.describe UserOrder, type: :model do
     end
   end
 end
-
