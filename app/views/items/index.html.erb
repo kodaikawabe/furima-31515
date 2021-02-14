@@ -120,7 +120,7 @@
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
 
-
+   <% unless @items.exists?  %>
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
@@ -147,6 +147,7 @@
         </div>
         <% end %>
       </li>
+    <% end %>
 
       <% if @items.exists?  %>
 
