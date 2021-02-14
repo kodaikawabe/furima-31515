@@ -1,12 +1,14 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_item
+  before_action :move_to_index
+  before_action :soldout_item
 
   def index
     @user_order = UserOrder.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @user_order = UserOrder.new(buy_params)
     if @user_order.valid?
       @user_order.save
@@ -26,5 +28,17 @@ class BuysController < ApplicationController
   def buy_params
     params.require(:user_order).permit(:postal_code, :prefectures_id, :municipal_district,:address,
       :building_name, :phone_number).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
- end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    redirect_to root_path if current_user.id == @item.user_id
+  end
+
+  def soldout_item
+    redirect_to root_path if @item.buy.present?
+  end
 end
