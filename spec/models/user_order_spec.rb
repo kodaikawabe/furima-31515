@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe UserOrder, type: :model do
     before do
-      user = FactoryBot.build(:user)
-      item = FactoryBot.build(:item) 
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
       @user_order = FactoryBot.build(:user_order, user_id: user.id, item_id: item.id)
+      sleep 0.1
     end
     describe '商品購入機能' do
       context '商品が出品できる場合' do
@@ -19,9 +20,9 @@ RSpec.describe UserOrder, type: :model do
       end
       context '商品が出品できない場合' do
         it 'postal_codeが空だと保存できないこと' do
-         @user_order.postal_code = ''
+          @user_order.postal_code = ''
           @user_order.valid?
-         expect(@user_order.errors.full_messages).to include("Postal code can't be blank")
+          expect(@user_order.errors.full_messages).to include("Postal code can't be blank")
         end
         it 'postal_codeにハイフンが含まれていないと保存できないこと' do
           @user_order.postal_code = '1234567'
